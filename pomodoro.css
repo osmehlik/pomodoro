@@ -1,0 +1,30 @@
+body {
+    font-family: sans-serif;
+    background-color: orangered;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 1em;
+}
+
+#page {
+    width: 200pt;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+    border-radius: 4em;
+    border: 4pt solid white;
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom:0;
+}
+
+#timer {
+    font-size: 64pt;
+}
+
+.hidden {
+    display: none;
+}
