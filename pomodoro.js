@@ -24,10 +24,10 @@ const onTimerZero = () => {
 const onTimerTick = () => {
     if (remainingSeconds > 0) {
         remainingSeconds--;
+        updateDisplay();
     } else {
         onTimerZero();
     }
-    updateDisplay();
 }
 
 const onStartClick = (e) => {
