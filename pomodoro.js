@@ -10,7 +10,7 @@ let remainingSeconds = pomodoroMinutes * 60;
 
 const getMinutes = () => Math.floor(remainingSeconds / 60);
 const getSeconds = () => remainingSeconds % 60;
-const padZeros = (seconds) => seconds < 10 ? "0" + seconds : seconds;
+const padZeros = (val) => val < 10 ? "0" + val : val;
 
 const updateDisplay = () => {
     txtTimer.textContent = `${padZeros(getMinutes())}:${padZeros(getSeconds())}`;
