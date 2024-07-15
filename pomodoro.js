@@ -13,7 +13,7 @@ const getSeconds = () => remainingSeconds % 60;
 const padZeros = (seconds) => seconds < 10 ? "0" + seconds : seconds;
 
 const updateDisplay = () => {
-    txtTimer.textContent = `${padZeros(getMinutes(remainingSeconds))}:${padZeros(getSeconds(remainingSeconds))}`;
+    txtTimer.textContent = `${padZeros(getMinutes())}:${padZeros(getSeconds())}`;
 }
 
 const onTimerZero = () => {
