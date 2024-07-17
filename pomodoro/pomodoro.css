@@ -33,8 +33,14 @@ form {
     display: none;
 }
 
-.status {
-    background-color: rgba(1,1,1,0.1);
-    border-bottom-left-radius: 4em;
-    border-bottom-right-radius: 4em;
+button {
+    background-color: white;
+    border: none;
+    border-radius: 1em;
+    padding: .25em .5em;
+}
+
+button:hover {
+    background-color: black;
+    color: white;
 }
