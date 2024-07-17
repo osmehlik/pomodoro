@@ -59,9 +59,7 @@ const onTimerTick = () => {
     }
 }
 
-const onStartClick = (e) => {
-    e.preventDefault();
-
+const onStartClick = () => {
     timerInterval = setInterval(onTimerTick, 1000);
 
     hide(btnStart);
@@ -72,9 +70,7 @@ const onStartClick = (e) => {
     drawProgress();
 }
 
-const onPauseClick = (e) => {
-    e.preventDefault();
-
+const onPauseClick = () => {
     clearInterval(timerInterval);
 
     show(btnStart);
@@ -84,9 +80,7 @@ const onPauseClick = (e) => {
     drawProgress();
 }
 
-const onResetClick = (e) => {
-    e.preventDefault();
-
+const onResetClick = () => {
     clearInterval(timerInterval);
 
     show(btnStart);
@@ -100,9 +94,7 @@ const onResetClick = (e) => {
     drawProgress();
 }
 
-const onContinueClick = (e) => {
-    e.preventDefault();
-
+const onContinueClick = () => {
     if (activity === "Pomodoro") {
         activity = pomodoros % 4 === 0 ? "Long Break" : "Short Break";
     } else {
@@ -123,9 +115,7 @@ const onContinueClick = (e) => {
     }
 }
 
-const onSkipClick = (e) => {
-    e.preventDefault();
-
+const onSkipClick = () => {
     clearInterval(timerInterval);
 
     activity = "Pomodoro";
