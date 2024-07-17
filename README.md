@@ -5,12 +5,14 @@ A simple pomodoro timer.
 
 ## Usage
 
-Open `index.html` in this folder.
+Open `index.html` in `pomodoro` folder.
 
 ## Screenshots
 
-![](screen1.png)
-![](screen2.png)
+![](screenshots/pomodoro1.png)
+![](screenshots/pomodoro2.png)
+![](screenshots/pomodoro3.png)
+![](screenshots/pomodoro4.png)
 
 ## More information
 

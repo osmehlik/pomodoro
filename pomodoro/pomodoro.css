@@ -11,7 +11,7 @@ body {
     width: 200pt;
     margin-left: auto;
     margin-right: auto;
-    padding: 1em;
+    padding: 0em;
     border-radius: 4em;
     border: 4pt solid white;
 }
@@ -25,6 +25,16 @@ h1 {
     font-size: 64pt;
 }
 
+form {
+    margin-bottom: 1em;
+}
+
 .hidden {
     display: none;
+}
+
+.status {
+    background-color: rgba(1,1,1,0.1);
+    border-bottom-left-radius: 4em;
+    border-bottom-right-radius: 4em;
 }
