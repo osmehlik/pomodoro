@@ -4,22 +4,23 @@ const activitiesLengthMinutes = {
     "Long Break": 20
 };
 
-const txtTimer = document.getElementById("timer");
+const spanTimer = document.getElementById("timer");
+const spanActivity = document.getElementById("activity");
+const spanProgress = document.getElementById("progress");
+const spanPomodoros = document.getElementById("pomodoros");
+
 const btnStart = document.getElementById("start");
 const btnPause = document.getElementById("pause");
 const btnReset = document.getElementById("reset");
 const btnContinue = document.getElementById("continue");
 const btnSkip = document.getElementById("skip");
-const spanCurrentActivity = document.getElementById("currentActivity");
-const spanCurrentStatus = document.getElementById("currentStatus");
-const spanCurrentPomodoros = document.getElementById("currentPomodoros");
 
-let currentActivity = "Pomodoro";
-let currentStatus = "Not started";
-let currentPomodoros = 0;
+let activity = "Pomodoro";
+let progress = "Not started";
+let pomodoros = 0;
 
 let timerInterval = null;
-let remainingSeconds = activitiesLengthMinutes[currentActivity] * 60;
+let remainingSeconds = activitiesLengthMinutes[activity] * 60;
 
 const getMinutes = () => Math.floor(remainingSeconds / 60);
 const getSeconds = () => remainingSeconds % 60;
@@ -27,28 +28,10 @@ const padZeros = (val) => val < 10 ? "0" + val : val;
 const hide = (el) => { el.classList.add("hidden"); }
 const show = (el) => { el.classList.remove("hidden"); }
 
-const drawCurrentTime = () => {
-    txtTimer.textContent = `${padZeros(getMinutes())}:${padZeros(getSeconds())}`;
-}
-
-const drawCurrentActivity = () => {
-    spanCurrentActivity.textContent = currentActivity;
-}
-
-const drawCurrentStatus = () => {
-    spanCurrentStatus.textContent = currentStatus;
-}
-
-const drawCurrentPomodoros = () => {
-    spanCurrentPomodoros.textContent = `Pomodoros Done: ${currentPomodoros}`;
-}
-
-const draw = () => {
-    drawCurrentTime();
-    drawCurrentActivity();
-    drawCurrentStatus();
-    drawCurrentPomodoros();
-}
+const drawTime = () => { spanTimer.textContent = `${padZeros(getMinutes())}:${padZeros(getSeconds())}`; }
+const drawActivity = () => { spanActivity.textContent = activity; }
+const drawProgress = () => { spanProgress.textContent = progress; }
+const drawPomodoros = () => { spanPomodoros.textContent = `Pomodoros Done: ${pomodoros}`; }
 
 const onTimerZero = () => {
     clearInterval(timerInterval);
@@ -58,19 +41,19 @@ const onTimerZero = () => {
     hide(btnSkip);
     show(btnContinue);
 
-    currentStatus = "Finished";
-    drawCurrentStatus();
+    progress = "Finished";
+    drawProgress();
 
-    if (currentActivity === "Pomodoro") {
-        currentPomodoros++;
-        drawCurrentPomodoros();
+    if (activity === "Pomodoro") {
+        pomodoros++;
+        drawPomodoros();
     }
 }
 
 const onTimerTick = () => {
     if (remainingSeconds > 0) {
         remainingSeconds--;
-        drawCurrentTime();
+        drawTime();
     } else {
         onTimerZero();
     }
@@ -85,8 +68,8 @@ const onStartClick = (e) => {
     show(btnPause);
     show(btnReset);
 
-    currentStatus = "Started";
-    drawCurrentStatus();
+    progress = "Started";
+    drawProgress();
 }
 
 const onPauseClick = (e) => {
@@ -97,8 +80,8 @@ const onPauseClick = (e) => {
     show(btnStart);
     hide(btnPause);
 
-    currentStatus = "Paused";
-    drawCurrentStatus();
+    progress = "Paused";
+    drawProgress();
 }
 
 const onResetClick = (e) => {
@@ -110,32 +93,32 @@ const onResetClick = (e) => {
     hide(btnPause);
     hide(btnReset)
 
-    remainingSeconds = activitiesLengthMinutes[currentActivity] * 60;
-    drawCurrentTime();
+    remainingSeconds = activitiesLengthMinutes[activity] * 60;
+    drawTime();
 
-    currentStatus = "Not Started";
-    drawCurrentStatus();
+    progress = "Not Started";
+    drawProgress();
 }
 
 const onContinueClick = (e) => {
     e.preventDefault();
 
-    if (currentActivity === "Pomodoro") {
-        currentActivity = currentPomodoros % 4 === 0 ? "Long Break" : "Short Break";
+    if (activity === "Pomodoro") {
+        activity = pomodoros % 4 === 0 ? "Long Break" : "Short Break";
     } else {
-        currentActivity = "Pomodoro";
+        activity = "Pomodoro";
     }
-    drawCurrentActivity();
+    drawActivity();
 
-    remainingSeconds = activitiesLengthMinutes[currentActivity] * 60;
-    drawCurrentTime();
+    remainingSeconds = activitiesLengthMinutes[activity] * 60;
+    drawTime();
 
-    currentStatus = "Not Started";
-    drawCurrentStatus();
+    progress = "Not Started";
+    drawProgress();
 
     hide(btnContinue);
     show(btnStart);
-    if (currentActivity == "Short Break" || currentActivity == "Long Break") {
+    if (activity == "Short Break" || activity == "Long Break") {
         show(btnSkip);
     }
 }
@@ -145,14 +128,14 @@ const onSkipClick = (e) => {
 
     clearInterval(timerInterval);
 
-    currentActivity = "Pomodoro";
-    drawCurrentActivity();
+    activity = "Pomodoro";
+    drawActivity();
 
-    currentStatus = "Not Started";
-    drawCurrentStatus();
+    progress = "Not Started";
+    drawProgress();
 
-    remainingSeconds = activitiesLengthMinutes[currentActivity] * 60;
-    drawCurrentTime();
+    remainingSeconds = activitiesLengthMinutes[activity] * 60;
+    drawTime();
 
     hide(btnSkip);
     hide(btnPause);
@@ -166,7 +149,11 @@ const onWindowLoad = (e) => {
     btnReset.addEventListener("click", onResetClick);
     btnContinue.addEventListener("click", onContinueClick);
     btnSkip.addEventListener("click", onSkipClick);
-    draw();
+
+    drawTime();
+    drawActivity();
+    drawProgress();
+    drawPomodoros();
 }
 
 window.onload = onWindowLoad
