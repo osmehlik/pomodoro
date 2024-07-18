@@ -15,6 +15,8 @@ const btnReset = document.getElementById("reset");
 const btnContinue = document.getElementById("continue");
 const btnSkip = document.getElementById("skip");
 
+const audio = new Audio('ring.mp3');
+
 let activity = "Pomodoro";
 let progress = "Not started";
 let pomodoros = 0;
@@ -36,6 +38,8 @@ const drawPomodoros = () => { spanPomodoros.textContent = `Pomodoros Done: ${pom
 const onTimerZero = () => {
     clearInterval(timerInterval);
 
+    audio.play();
+
     hide(btnPause);
     hide(btnReset);
     hide(btnSkip);
@@ -54,7 +58,8 @@ const onTimerTick = () => {
     if (remainingSeconds > 0) {
         remainingSeconds--;
         drawTime();
-    } else {
+    }
+    if (remainingSeconds <= 0) {
         onTimerZero();
     }
 }
